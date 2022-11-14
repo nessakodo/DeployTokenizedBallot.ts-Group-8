@@ -59,3 +59,4 @@ DELEGATE_TO is the address you want to receive the voting power of your tokens.
 
 The ERC20Votes contract is deployed to goerli. The address is:
 0x35B6AF53a000c14bd4e8E773128C428eE0883CbB
+
