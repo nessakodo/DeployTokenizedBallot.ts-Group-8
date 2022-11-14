@@ -26,7 +26,7 @@ Send your github username in discord to be added to the repo as a collaborator s
 
 Project is now installed on your machine.
 
-".env" file is needed. create a new one or copy one from another lesson and paste it inside the encode_group_2 folder
+".env" file is needed. create a new one or copy one from another lesson and paste it inside the encode-week-3 folder
 
 .env needs to have a "PRIVATE_KEY=xxxxxxxxxxxxxx" where private key is exported from your metamask
 
