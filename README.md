@@ -78,7 +78,9 @@ if you are not the admin of the ERC20Votes token contract and want to get tokens
 
 paste the command into the terminal. replace CONTRACT_ADDRESS with the address you got from the deployment step. BUY_AMOUNT is the amount of ether you are sending to the contract. Tokens are minted 1:1 with gwei so a BUY_AMOUNT of 0.01 would mint 10000000000000000 tokens
 
-- yarn run ts-node ./scripts/BuyToken.ts CONTRACT_ADDRESS MINT_TO_ADDRESS BUY_AMOUNT
+this mints the tokens to whoever sends the transaction so mint address in not needed
+
+- yarn run ts-node ./scripts/BuyToken.ts CONTRACT_ADDRESS BUY_AMOUNT
 
 #### Notes
 
