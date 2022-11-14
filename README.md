@@ -1,13 +1,85 @@
-# Sample Hardhat Project
+# ETHdenver Group Project #2
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+## Setup
 
-Try running some of the following tasks:
+create new folder "Project2"
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
-```
+open terminal inside "Project2"
+
+enter these commands in your terminal. press enter after each:
+
+- git clone https://github.com/austinjblake/encode-week-3.git
+- cd encode-week-3
+
+#### If using Yarn:
+
+- yarn
+- yarn hardhat compile
+
+#### If using NPM:
+
+- npm install --force
+- npx hardhat compile
+
+Project is now installed on your machine.
+
+".env" file is needed. create a new one or copy one from another lesson and paste it inside the encode_group_2 folder
+
+.env needs to have a "PRIVATE_KEY=xxxxxxxxxxxxxx" where private key is exported from your metamask
+
+MAKE SURE THIS ACCOUNT IS ONLY FOR CODING AND HAS NO REAL MONEY IN IT!!!!!!!!!!
+
+now that you have your private key in .env open the .gitignore file and double check .env is listed in there so your key is not added to git changes
+
+.env can also have api keys to help prevent rate limiting. do one or all or none your script should still work
+
+"ALCHEMY_API_KEY=xxxxxxxxxxxx" you can create an account on alchemy for free and create an api key to put here
+
+"INFURA_API_KEY=xxxxxxxxxxxx" you can create an account on infura for free and create an api key to put here
+
+"ETHERSCAN_API_KEY=xxxxxxxxxxxx" you can create an account on etherscan for free and create an api key to put here
+
+#### Feel free at this point to try out "yarn hardhat test" or "npx hardhat test" to run the test suite. Not required
+
+## Scripts
+
+For the following command line scripts-if using Yarn, paste scripts as is. If using npm, replace "yarn run" with "npx"
+
+### ERC20 Voting Token Deployment
+
+this step is not needed if interacting with the token contract already on the blockchain
+
+if you want to deploy your own, enter the command below in the terminal
+
+- yarn run ts-node ./scripts/DeployToken.ts
+
+after this is run the console will print out the address of the newly deployed token contract. copy and keep this for future use. you are the admin of this contract so you may mint tokens to any address you choose without paying
+
+### Mint ERC20 Voting Tokens to an address
+
+tokens are used to calculate voting power and accounts must have a balance of tokens before ballot snapshot to vote
+
+if you are interacting with an existing contract, send your address in a message to get tokens minted to you
+
+if you deployed your own contract you can use the command below to mint tokens to another address for voting
+
+paste the command into the terminal. replace CONTRACT_ADDRESS with the address you got from the deployment step. MINT_TO_ADDRESS is the wallet address you want to mint voting tokens for. MINT_AMOUNT is the number of tokens to mint denominated in ether. Tokens are minted 1:1 with gwei so a MINT_AMOUNT of 0.01 would mint 10000000000000000 tokens
+
+- yarn run ts-node ./scripts/MintToken.ts CONTRACT_ADDRESS MINT_TO_ADDRESS MINT_AMOUNT
+
+### Buy ERC20 Voting Tokens
+
+tokens are used to calculate voting power and accounts must have a balance of tokens before ballot snapshot to vote
+
+if you are not the admin of the ERC20Votes token contract and want to get tokens for voting without waiting for an admin to mint you tokens, you can run this script to call the buyTokens function. The contract will mint you tokens proportionate to the value of ether you send. 1 gwei = 1 token. Anyone can call this function
+
+paste the command into the terminal. replace CONTRACT_ADDRESS with the address you got from the deployment step. BUY_AMOUNT is the amount of ether you are sending to the contract. Tokens are minted 1:1 with gwei so a BUY_AMOUNT of 0.01 would mint 10000000000000000 tokens
+
+- yarn run ts-node ./scripts/BuyToken.ts CONTRACT_ADDRESS MINT_TO_ADDRESS BUY_AMOUNT
+
+#### Notes
+
+The ERC20Votes contract is deployed to goerli. The address is:
+0xd6CD9823d1b9a8F215Fc0230FF712CbA57c53d40
+
+You can paste your address in the discord to request tokens to be sent to you. You can also mint your own tokens with a function that has been added by sending ether to the contract. It will mint you G5 voting tokens 1:1 with gwei. Just use the BuyTokens script as shown above. This is to make it easier to interact without having to wait for the admin to mint tokens for you
