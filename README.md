@@ -1,15 +1,18 @@
-# ETHdenver Group Project #2
+# ETHdenver Group Project #3
 
 ## Setup
 
-create new folder "Project2"
+create new folder "Project3"
 
-open terminal inside "Project2"
+open terminal inside "Project3"
 
 enter these commands in your terminal. press enter after each:
 
 - git clone https://github.com/austinjblake/encode-week-3.git
+- git checkout -b _yournameorusername_
 - cd encode-week-3
+
+Send your github username in discord to be added to the repo as a collaborator so anyone on the team can push their code here
 
 #### If using Yarn:
 
