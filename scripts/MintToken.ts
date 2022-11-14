@@ -1,39 +1,33 @@
-import { Group5Token__factory } from "./../typechain-types/factories/contracts/ERC20Votes.sol/Group5Token__factory";
-import { ethers } from "ethers";
+import { ethers } from "hardhat";
 import * as dotenv from "dotenv";
-dotenv.config();
+import { MyToken__factory } from "../typechain-types";
+dotenv.config()
+//MyToken Address
+const contractAddress = "0x35B6AF53a000c14bd4e8E773128C428eE0883CbB";
+const MINT_VALUE = ethers.utils.parseEther("10");
 
-async function deploy() {
-  // use ethers to connect to goerli and wallet to create a signer
-  const provider = ethers.getDefaultProvider("goerli", {
-    alchemy: process.env.ALCHEMY_API_KEY,
-    infura: process.env.INFURA_API_KEY,
-    etherscan: process.env.ETHERSCAN_API_KEY,
-  });
-  const wallet = new ethers.Wallet(process.env.PRIVATE_KEY ?? "");
-  const signer = wallet.connect(provider);
-  const balance = await signer.getBalance();
-  console.log(
-    `Working on Goerli Testnet connected to wallet ${signer.address} with balance of ${balance}`
-  );
-  // connect to token contract onchain with signer and contract address passed in from cli argument
-  const tokenFactory = new Group5Token__factory(signer);
-  const tokenContract = await tokenFactory.attach(process.argv[2]);
-  const mintAddress = process.argv[3];
-  const initTokens = await tokenContract.balanceOf(mintAddress);
-  console.log(`Account ${mintAddress} currently has ${initTokens} G5 tokens`);
-  console.log("Minting ERC20voting token...");
-  // mint erc20 voting tokens with amount of ether from cli argument
-  const mintTx = await tokenContract.mint(
-    mintAddress,
-    ethers.utils.parseEther(process.argv[4])
-  );
-  await mintTx.wait();
-  const tokenBalance = await tokenContract.balanceOf(mintAddress);
-  console.log(`Account ${mintAddress} now has ${tokenBalance} G5 tokens`);
+async function main() {
+    const provider = ethers.getDefaultProvider("goerli", { alchemy: process.env.ALCHEMY_API });
+    const wallet = ethers.Wallet.fromMnemonic(process.env.MNEMONIC ?? "");
+    const signer = wallet.connect(provider);
+
+
+    const tokenContractFactory = new MyToken__factory(signer);
+    const tokenContract = tokenContractFactory.attach(contractAddress);
+
+    const signerBalance = await tokenContract.balanceOf(signer.address);
+
+    console.log(`Your balance is: ${signerBalance}`);
+
+    console.log("Minting tokens");
+    const mintTx = await tokenContract.mint(signer.address, MINT_VALUE);
+    await mintTx.wait();
+
+    const newBalance = await tokenContract.balanceOf(signer.address);
+    console.log(`Your new balance is: ${newBalance}`);
 }
 
-deploy().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+})

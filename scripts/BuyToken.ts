@@ -1,4 +1,4 @@
-import { Group5Token__factory } from "./../typechain-types/factories/contracts/ERC20Votes.sol/Group5Token__factory";
+import { MyToken__factory } from "./../typechain-types/factories/contracts/ERC20Votes.sol/MyToken__factory";
 import { ethers } from "ethers";
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -17,7 +17,7 @@ async function deploy() {
     `Working on Goerli Testnet connected to wallet ${signer.address} with balance of ${balance}`
   );
   // connect to token contract onchain with signer and contract address passed in from cli argument
-  const tokenFactory = new Group5Token__factory(signer);
+  const tokenFactory = new MyToken__factory(signer);
   const tokenContract = await tokenFactory.attach(process.argv[2]);
   const initTokens = await tokenContract.balanceOf(signer.address);
   console.log(

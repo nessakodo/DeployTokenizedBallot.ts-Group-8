@@ -1,12 +1,12 @@
 import { ethers } from "hardhat";
-import { Group5Token__factory } from "../typechain-types";
+import { MyToken__factory } from "../typechain-types";
 
 const MINT_VALUE = ethers.utils.parseEther("10");
 
 async function main() {
   const accounts = await ethers.getSigners();
   // Deploy contract
-  const contractFactory = new Group5Token__factory(accounts[0]);
+  const contractFactory = new MyToken__factory(accounts[0]);
   const contract = await contractFactory.deploy();
   await contract.deployed();
   console.log(`Token contract deployed at ${contract.address}`);
@@ -35,10 +35,10 @@ async function main() {
     before self delegating`
   );
   // Self delgate
-  const delegatTx = await contract
+  const delegateTx = await contract
     .connect(accounts[1])
     .delegate(accounts[1].address);
-  await delegatTx.wait();
+  await delegateTx.wait();
   // Check the voting power
   const votesAfter = await contract.getVotes(accounts[1].address);
   console.log(
