@@ -58,6 +58,4 @@ DELEGATE_TO is the address you want to receive the voting power of your tokens.
 #### Notes
 
 The ERC20Votes contract is deployed to goerli. The address is:
-0xd6CD9823d1b9a8F215Fc0230FF712CbA57c53d40
-
-You can paste your address in the discord to request tokens to be sent to you. You can also mint your own tokens with a function that has been added by sending ether to the contract. It will mint you G5 voting tokens 1:1 with gwei. Just use the BuyTokens script as shown above. This is to make it easier to interact without having to wait for the admin to mint tokens for you
+0x35B6AF53a000c14bd4e8E773128C428eE0883CbB
