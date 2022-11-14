@@ -21,7 +21,7 @@ async function deploy() {
   const tokenContract = await tokenFactory.attach(process.argv[2]);
   const initTokens = await tokenContract.balanceOf(signer.address);
   console.log(
-    `Account ${signer.address} currently has ${initTokens} G5 tokens`
+    `Account ${signer.address} currently has ${initTokens} tokens`
   );
   console.log("Buying ERC20voting token...");
   // buy erc20 voting tokens with amount of ether from cli argument
@@ -30,7 +30,7 @@ async function deploy() {
   });
   await buyTx.wait();
   const tokenBalance = await tokenContract.balanceOf(signer.address);
-  console.log(`Account ${signer.address} now has ${tokenBalance} G5 tokens`);
+  console.log(`Account ${signer.address} now has ${tokenBalance} tokens`);
 }
 
 deploy().catch((error) => {
