@@ -22,6 +22,10 @@ contract Group5Token is ERC20, AccessControl, ERC20Permit, ERC20Votes {
         _mint(msg.sender, msg.value);
     }
 
+    function withdraw() public onlyRole(DEFAULT_ADMIN_ROLE) {
+        payable(msg.sender).transfer(address(this).balance);
+    }
+
     // The following functions are overrides required by Solidity.
 
     function _afterTokenTransfer(
