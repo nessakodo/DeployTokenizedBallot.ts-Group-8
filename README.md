@@ -82,6 +82,16 @@ this mints the tokens to whoever sends the transaction so mint address in not ne
 
 - yarn run ts-node ./scripts/BuyToken.ts CONTRACT_ADDRESS BUY_AMOUNT
 
+### Delegate Voting power
+
+after an account has a balance of tokens, those tokens must be delegated in order to give voting power. accounts can self delegate or delegate to another address but delegation is required or you will not be able to vote
+
+function will delegate all of the current token amount worth of voting power. no value amount input needed
+
+DELEGATE_TO is the address you want to receive the voting power of your tokens. enter your own address if you want to self-delegate
+
+- yarn run ts-node ./scripts/Delegate.ts CONTRACT_ADDRESS DELEGATE_TO
+
 #### Notes
 
 The ERC20Votes contract is deployed to goerli. The address is:

@@ -1,12 +1,12 @@
 import { ethers } from "hardhat";
-import { MyToken__factory } from "../typechain-types";
+import { Group5Token__factory } from "../typechain-types";
 
 const MINT_VALUE = ethers.utils.parseEther("10");
 
 async function main() {
   const accounts = await ethers.getSigners();
   // Deploy contract
-  const contractFactory = new MyToken__factory(accounts[0]);
+  const contractFactory = new Group5Token__factory(accounts[0]);
   const contract = await contractFactory.deploy();
   await contract.deployed();
   console.log(`Token contract deployed at ${contract.address}`);
